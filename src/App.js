@@ -16,6 +16,7 @@ class App extends Component {
       fontFamily: "monospace",
       allowEdit: true
     };
+    // What is binding this doing?
     this.updateColor = this.updateColor.bind(this);
     this.updateSize = this.updateSize.bind(this);
     this.updateFamily = this.updateFamily.bind(this);
@@ -27,7 +28,7 @@ class App extends Component {
   }
 
   updateSize(val) {
-    this.setState({ fontColor: val });
+    this.setState({ fontSize: val });
   }
 
   updateFamily(val) {
@@ -42,10 +43,23 @@ class App extends Component {
     return (
       <div>
         <div className="headerBar">
-          <EditToggle />
-          <ColorChanger />
-          <SizeChanger />
-          <FamilyChanger />
+          <EditToggle
+            // these are props
+            update={this.updateEditStatus}
+            allowEdit={this.state.allowEdit}
+          />
+          <ColorChanger
+            update={this.updateColorChanger}
+            allowEdit={this.state.allowEdit}
+          />
+          <SizeChanger
+            update={this.SizeChanger}
+            allowEdit={this.state.allowEdit}
+          />
+          <FamilyChanger
+            update={this.FamilyChanger}
+            allowEdit={this.state.allowEdit}
+          />
         </div>
         <div className="textArea">
           <TextContainer />
